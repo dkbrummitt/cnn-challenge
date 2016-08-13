@@ -1,20 +1,24 @@
 {
-    "name": "CNN Challenge",
-    "author": "Delicia Brummitt",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "license": "(MIT OR Apache-2.0)",
-    "private": true,
-    "bin": {
-        "Template-App": "./config/server.js"
-    },
-    "scripts": {},
-    "dependencies": {
-        "body-parser": "^1.15.2",
-        "express": "^4.14.0",
-        "express-handlebars": "^3.0.0",
-        "express-session": "^1.14.0",
-        "serve-favicon": "^2.3.0"
-    }
+  "name": "CNN Challenge",
+  "author": "Delicia Brummitt",
+  "version": "1.0.0",
+  "description": "a technical coding challenge for testing a candidates skills and aptitude",
+  "main": "index.js",
+  "license": "(MIT OR Apache-2.0)",
+  "private": true,
+  "bin": {
+    "Template-App": "./config/server.js"
+  },
+  "scripts": {},
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.14.0",
+    "lodash": "^4.15.0",
+    "method-override": "^2.3.6",
+    "node-restful": "^0.2.5",
+    "serve-favicon": "^2.3.0",
+    "twitter": "^1.4.0"
+  }
 }
