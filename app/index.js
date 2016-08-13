@@ -5,7 +5,11 @@ const session = require('express-session');
 const hbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
+const _ = require('lodash');
+const methodOverride = require('method-override');
+var twitter = require('twitter');
 
+//create the express application
 const app = express();
 
 
@@ -50,11 +54,21 @@ handleBasicRequest = (request, response) => {
 customizeHeaders = (request, response, next) => {
   app.disable('x-powered-by');
   response.setHeader('X-Powered-By', 'You');
-  //response.setHeader('Content-Type', 'application/json');
+
   next();
 };
 
+
+// Add middle ware to customize response headers
 app.use(customizeHeaders);
+
+// Add Middleware needed for RESTful API
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(methodOverride('X-HTTP-Method-Override'));
+
 //Define routes and Error Handling
 app.get('/', handleBasicRequest);
 app.use(handleError);
