@@ -30,16 +30,17 @@ task does not pause.
 <a name="Quick"></a>
 ## Quick start
 
-Clone this repository to your computer.
-Change Directory into the cnn-challenge.
-Execute the following at the terminal/command line.
+1. Clone this repository to your computer.
+2. Change Directory into the cnn-challenge.
+3. Execute the following at the terminal/command line.
 ```sh
 npm install
 bower install
 node index.js
 ```
+4. Edit the file located at config/index.js to include your twitter access information.
 
-In a browser, navigate to http://localhost:7000/#/
+5. In a browser, navigate to http://localhost:7000/#/
 
 <a name="License"></a>
 ## License
