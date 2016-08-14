@@ -1,0 +1,21 @@
+/* Added to support angular ui*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+/*Customize look and feel*/
+.navbar-brand {
+    background-image: url(http://i.cdn.turner.com/cnn/.e1mo/img/4.0/logos/logo_cnn_badge_2up.png);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 70px;
+    height: 70px;
+    position: absolute;
+    margin-right: 40px;
+    padding-right: 40px;
+    width: 70px;
+    z-index: 32;
+    color: transparent !important;
+}
+
+.navbar .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7;
+    background-color: #000000 !important;
+}

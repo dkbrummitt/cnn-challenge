@@ -1,0 +1,17 @@
+<div ng-controller="FeedController as ctrl">
+
+    You have {{limits.remaining}} requests remaining;
+    <h3>Feeds</h3>
+    <div ng-repeat="(key, value) in feeds">
+        <span ng-if="key != 'limits'">
+        <h4>{{key}}</h4>
+
+            <div ng-repeat="(key2, value2) in value" ng-class="'bs-callout bs-callout-info'">
+                <span ng-if ="value2.isRetweet" class="pull-right"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+        <p> {{value2.text}}
+            <br> from: <a href="{{value2.from.inTwitter}}">@{{value2.from.handle}}</a>
+        </p>
+    </div>
+    </span>
+</div>
+</div>

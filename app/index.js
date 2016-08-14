@@ -1,4 +1,5 @@
-const config = require('../config');
+//const twClient = require('../components/twitter');
+const feedController = require('./features/feed');
 
 const express = require('express');
 const session = require('express-session');
@@ -7,11 +8,10 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const _ = require('lodash');
 const methodOverride = require('method-override');
-var twitter = require('twitter');
+const router = express.Router();
 
 //create the express application
 const app = express();
-
 
 /**
  * Handles run-time errors during request processing. Currently results in 500
@@ -39,16 +39,52 @@ handleError = (err, request, response, next) => {
  * @param {object} response The HTTP response that will be sent to client
  */
 handleBasicRequest = (request, response) => {
-  response.json({
-    message: "Whuz upper from ?"
-  });
+  var count = parseInt(request.query.count) || 5;
+  //count++; //twitter returns cnt -1
+  var topic = request.query.topic || 'cnnbrk'; //twitter returns cnt -1
+  console.log(new Date(), 'Searching topic=', topic, 'count=', count);
+  console.log('what is topic???', (typeof topic));
+  if (typeof topic === 'object') {
+    feedController.getFeeds(topic, count, function mycb(data) {
+      // callback then respond
+      // TODO dont call mycb more than once @see feature jS
+      console.log(new Date(), 'Sent Response');
+      feedController.getLimits(function (limits) {
+        try {
+          data.limits = limits.resources.search['/search/tweets'];
+          console.log(new Date(), 'Limits: ', data.limits);
+          response.json({
+            feed: data
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    });
+  } else {
+    feedController.getFeed(topic, count, function mycb(data) {
+      // callback then respond
+      console.log(new Date(), 'Sent Response');
+      feedController.getLimits(function (limits) {
+        try {
+          data.limits = limits.resources.search['/search/tweets'];
+          console.log(new Date(), 'Limits: ', data.limits);
+          response.json({
+            feed: data
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    });
+  }
 };
 
 /**
  * Middleware function to customize any ubiquitous response headers
  * @param {object} request The HTTP request recieved from client
  * @param {object} response The HTTP response that will be sent to client
- * @param {function} next Call back function, that executes next step in
+ * @param {function} next Call back function, that executes next middleware in
  * processing chain.
  */
 customizeHeaders = (request, response, next) => {
@@ -58,10 +94,25 @@ customizeHeaders = (request, response, next) => {
   next();
 };
 
+/**
+ * Middleware function to add CORS support
+ * @param {object} request The HTTP request recieved from client
+ * @param {object} response The HTTP response that will be sent to client
+ * @param {function} next Call back function, that executes next step in
+ * processing chain.
+ */
+cors = (request, response, next) => {
+  response.header('Access-Control-Allow-Origin', '*'); //make API public
+  response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  response.header('Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept');
+
+  next();
+};
 
 // Add middle ware to customize response headers
 app.use(customizeHeaders);
-
+app.use(cors);
 // Add Middleware needed for RESTful API
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -70,7 +121,7 @@ app.use(bodyParser.urlencoded({
 app.use(methodOverride('X-HTTP-Method-Override'));
 
 //Define routes and Error Handling
-app.get('/', handleBasicRequest);
+app.get('/feed', handleBasicRequest);
 app.use(handleError);
 
 //export the app

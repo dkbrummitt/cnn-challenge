@@ -1,0 +1,12 @@
+<div>
+    This is a topic
+    <div ng-controller="TopicController as ctrl">
+        <div ng-repeat="alert in alerts" ng-class="'bs-callout bs-callout-' + (alert.type || 'warning')">
+            <span class="pull-right"><a ng-click="ctrl.closeAlert($index)"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+            <p>{{alert.msg}}</p>
+        </div>
+
+        <input type="text" placeholder="New Topic" ng-model="newTopic"/>&nbsp;<button type="button" class='btn btn-default' ng-click="ctrl.addAlert()">Add Alert</button>
+
+    </div>
+</div>
