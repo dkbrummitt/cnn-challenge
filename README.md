@@ -39,6 +39,8 @@ bower install
 node index.js
 ```
 
+In a browser, navigate to http://localhost:7000/#/
+
 <a name="License"></a>
 ## License
 The code is available under the [MIT license](/LICENSE.md).
