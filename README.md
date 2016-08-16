@@ -44,6 +44,6 @@ node index.js
 
 <a name="License"></a>
 ## License
-The code is available under the [MIT license](/LICENSE.md).
+The code is available under the [MIT license](LICENSE.md).
 <br>
 Copyright (c) 2016 Delicia Brummitt
