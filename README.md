@@ -1,5 +1,5 @@
 
-# ![CNN](public/favicon.ico) CNN Developer Interview Challenge
+# ![CNN](public/favicon.ico) Developer Interview Challenge
 [![MIT License](https://img.shields.io/badge/license-MIT-007EC7.svg?style=flat-square)](/LICENSE)
 
 - [Challenge Description](#Description)
