@@ -36,7 +36,11 @@ task does not pause.
 3. Execute the following at the terminal/command line.
   ```sh
   npm install
+  ```
+  ```sh
   bower install
+  ```
+  ```sh
   node index.js
   ```
 4. Edit the file located at config/index.js to include your twitter access information.
