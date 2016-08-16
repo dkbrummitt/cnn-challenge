@@ -26,7 +26,6 @@ task does not pause.
 
 * Homepage: https://dkbrummitt.github.io/cnn-challenge
 * Source: https://github.com/dkbrummitt/cnn-challenge.git
-* Twitter: [@cnn-challenge](https://twitter.com/cnn-challenge)
 
 <a name="Quick"></a>
 ## Quick start
