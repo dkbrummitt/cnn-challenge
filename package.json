@@ -9,7 +9,9 @@
   "bin": {
     "Template-App": "./config/server.js"
   },
-  "scripts": {},
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
