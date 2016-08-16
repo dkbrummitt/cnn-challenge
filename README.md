@@ -34,15 +34,9 @@ task does not pause.
 1. Clone this repository to your computer.
 2. Change Directory into the cnn-challenge.
 3. Execute the following at the terminal/command line.
-  1. ```bash
-  npm install
-  ```
-  2. ```sh
-  bower install
-  ```
-  3. ```sh
-  node index.js
-  ```
+  1. ```npm install```
+  2. ```bower install```
+  3. ``` node index.js ```
 4. Edit the file located at config/index.js to include your twitter access information.
 
 5. In a browser, navigate to http://localhost:7000/#/
