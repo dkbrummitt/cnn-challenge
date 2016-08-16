@@ -34,11 +34,11 @@ task does not pause.
 1. Clone this repository to your computer.
 2. Change Directory into the cnn-challenge.
 3. Execute the following at the terminal/command line.
-..```sh
-..npm install
-..bower install
-..node index.js
-..```
+  ```sh
+  npm install
+  bower install
+  node index.js
+  ```
 4. Edit the file located at config/index.js to include your twitter access information.
 
 5. In a browser, navigate to http://localhost:7000/#/
@@ -48,8 +48,8 @@ task does not pause.
 1. This README was generated from a [Readme template](https://github.com/dkbrummitt/readme-template) designed from several
 open source solutions.
 2. The development of this project was influenced by lessons learned from
-..* [Scotch.io](https://scotch.io/tutorials)
-..* John Papa's [Angular Style Guide](https://github.com/johnpapa/angular-styleguide)
+  * [Scotch.io](https://scotch.io/tutorials)
+  * John Papa's [Angular Style Guide](https://github.com/johnpapa/angular-styleguide)
 
 <a name="License"></a>
 ## License
