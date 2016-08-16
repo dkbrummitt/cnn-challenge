@@ -2,3 +2,5 @@ task.txt
 node_modules/
 config/index.js 
 config/index.js.bk 
+config/index.js.deploy
+config/index.js.master
