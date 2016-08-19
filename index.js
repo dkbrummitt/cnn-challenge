@@ -1,15 +1,29 @@
 const favicon = require('serve-favicon');
 const express = require('express');
+const winston = require('winston');
 const APP = require('./app');
 const PORT = process.env.PORT || 7000;
 
 initApplication = (err) => {
   if (err) {
-    console.log('Houston, we have a problem.\n', err);
+    winston.error({
+      timestamp: new Date().toISOString(),
+      pid: process.pid,
+      file: __filename,
+      method: "initApplication",
+      'err': err
+    });
+
     throw err;
   }
-  console.log('Listening on', PORT);
-  console.log('in directory ', __dirname);
+  winston.info({
+    timestamp: new Date().toISOString(),
+    pid: process.pid,
+    file: __filename,
+    method: "initApplication",
+    message: "Listening",
+    port: PORT
+  });
 };
 
 APP.use('/js', express.static(__dirname + '/public/js'));
