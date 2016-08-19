@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const _ = require('lodash');
 const methodOverride = require('method-override');
+const winston = require('winston');
 const router = express.Router();
 
 //create the express application
@@ -24,12 +25,24 @@ const app = express();
  * processing chain.
  */
 handleError = (err, request, response, next) => {
-  console.log('Houston, we have a problem:', err);
-  console.log('typeof err', (typeof err));
-  console.log('typeof request', (typeof request));
-  console.log('typeof response', (typeof response));
-  console.log('typeof next', (typeof next));
+  winston.error({
+    timestamp: new Date().toISOString(),
+    pid: process.pid,
+    file: __filename,
+    method: 'handleError',
+    'err': err
+  });
 
+  /*
+  winston.debug({
+    timestamp: new Date().toISOString(),
+    pid: process.pid,
+    file: __filename,
+    method: 'handleError',
+    'request': request,
+    'response': response,
+  });
+  /* // */
   response.status(500).send('something bad happened!');
 };
 
@@ -39,41 +52,52 @@ handleError = (err, request, response, next) => {
  * @param {object} response The HTTP response that will be sent to client
  */
 handleBasicRequest = (request, response) => {
+
+  winston.info({
+    timestamp: new Date().toISOString(),
+    pid: process.pid,
+    file: __filename,
+    method: 'handleBasicRequest'
+  });
   var count = parseInt(request.query.count) || 5;
-  //count++; //twitter returns cnt -1
-  var topic = request.query.topic || 'cnnbrk'; //twitter returns cnt -1
-  console.log(new Date(), 'Searching topic=', topic, 'count=', count);
-  console.log('what is topic???', (typeof topic));
+  var topic = request.query.topic || 'cnnbrk';
+
   if (typeof topic === 'object') {
     feedController.getFeeds(topic, count, function mycb(data) {
-      // callback then respond
-      // TODO dont call mycb more than once @see feature jS
-      console.log(new Date(), 'Sent Response');
       feedController.getLimits(function (limits) {
         try {
           data.limits = limits.resources.search['/search/tweets'];
-          console.log(new Date(), 'Limits: ', data.limits);
           response.json({
             feed: data
           });
         } catch (err) {
-          console.log(err);
+          winston.error({
+            timestamp: new Date().toISOString(),
+            pid: process.pid,
+            file: __filename,
+            method: 'handleBasicRequest[feedController.getLimits RESPONSE HANDLER]',
+            'err': err
+          });
         }
       });
     });
   } else {
     feedController.getFeed(topic, count, function mycb(data) {
       // callback then respond
-      console.log(new Date(), 'Sent Response');
       feedController.getLimits(function (limits) {
         try {
           data.limits = limits.resources.search['/search/tweets'];
-          console.log(new Date(), 'Limits: ', data.limits);
           response.json({
             feed: data
           });
         } catch (err) {
-          console.log(err);
+          winston.error({
+            timestamp: new Date().toISOString(),
+            pid: process.pid,
+            file: __filename,
+            method: 'handleBasicRequest[feedController.getLimits RESPONSE HANDLER]',
+            'err': err
+          });
         }
       });
     });
