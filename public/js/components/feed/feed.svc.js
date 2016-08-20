@@ -2,10 +2,12 @@
   'use strict';
   console.log('loaded2');
 
-  function feedService($http) {
+  function feedService($http, $location) {
     var topicsArray = localStorage.getItem('topics').split(',');
-    var baseURLString = 'http://localhost:7000/feed?count=5';
-
+    console.log('$location', $location);
+    var baseURLString = $location.protocol() + '://' + $location.host() + ':' +
+      $location.port() + '/feed?count=5';
+    console.log('baseURLString', baseURLString);
     var self = {
       getFeeds: getFeeds
     };
@@ -23,5 +25,7 @@
 
     return self;
   }
-  angular.module('challenge').service('feedService', ['$http', feedService]);
+  angular.module('challenge').service('feedService', ['$http', '$location',
+    feedService
+  ]);
 }());
