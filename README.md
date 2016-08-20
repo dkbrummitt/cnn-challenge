@@ -30,6 +30,7 @@ task does not pause.
 <a name="Quick"></a>
 ## Quick start
 *Note: This app is deployed on [Heroku](https://mighty-bayou-77293.herokuapp.com/#/)*
+
 1. Clone this repository to your computer.
 2. Change Directory into the cnn-challenge.
 3. Execute the following at the terminal/command line.
