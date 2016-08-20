@@ -10,7 +10,7 @@ initApplication = (err) => {
       timestamp: new Date().toISOString(),
       pid: process.pid,
       file: __filename,
-      method: "initApplication",
+      method: 'initApplication',
       'err': err
     });
 
@@ -20,8 +20,8 @@ initApplication = (err) => {
     timestamp: new Date().toISOString(),
     pid: process.pid,
     file: __filename,
-    method: "initApplication",
-    message: "Listening",
+    method: 'initApplication',
+    message: 'Listening',
     port: PORT
   });
 };
@@ -37,6 +37,13 @@ APP.get('*', function (req, res) {
 });
 /* // */
 APP.get('/*', function (req, res) {
+  winston.info({
+    timestamp: new Date().toISOString(),
+    pid: process.pid,
+    file: __filename,
+    method: 'APP.get',
+    'message': 'rendering...'
+  });
   res.sendFile('index.html', {
     root: __dirname + '/public'
   });
